@@ -1,0 +1,110 @@
+
+
+
+body {
+	padding: 0px;
+	margin: 0px;
+	font-family: 'Volkhov', serif;
+	background-color: black;
+}
+
+#headerOne {
+	color: white;
+	font-size: 90px;
+	text-decoration: underline;
+}
+
+#parraOne {
+	color: white;
+	font-size: 30px;
+}
+
+#mainWrapper {
+	padding-top: 10%;
+	background-color: blueviolet;
+	width: 100vW;
+	height: 100vH;
+	background-image: url(img/antique-author-beverageEdited.jpg);
+	background-size: cover;
+	background-position: center center;
+}
+
+#inputGroupSelect01 {
+	width: 50%;
+	margin-top: 10px;
+	margin-bottom: 40px;
+}
+
+/* ---------- writer page --------- */
+
+
+#mainWriterWrapper {
+	padding-top: 5%;
+	background-color: blueviolet;
+	width: 100vW;
+	height: 100vH;
+	background-image: url(img/antique-author-beverageEdited.jpg);
+	background-size: cover;
+	background-position: center center;
+}
+
+#textArea {
+	width: 80%;
+	height: 50vH;
+}
+
+#ControllCenter {
+	
+}
+
+#prediction {
+	color: blueviolet;
+}
+
+.ceep {
+	margin-left: 10px;
+	margin-right: 0px;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+.AIWriter {
+	margin-left: 0px;
+	margin-right: 10px;
+}
+
+.writing {
+	height: 100%;
+}
+
+#saveTextAndRestartBTN {
+	background-color: blueviolet;
+}
+
+#createdDIV {
+	text-align: left;
+}
+
+#result {
+	text-align: left;
+}
+
+#parraThree {
+	color: white;
+	font-size: 40px;
+}
+
+#parraFour {
+	color: white;
+	font-size: 30px;
+}
+
+
+
+
+
+
+
+
+
+

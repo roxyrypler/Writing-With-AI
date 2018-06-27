@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+	  
+	  <link href="https://fonts.googleapis.com/css?family=Volkhov" rel="stylesheet">
+	  
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	  <link rel="stylesheet" href="style.css">
+	  
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
+  	<script src="https://unpkg.com/ml5" type="text/javascript"></script>
+	  
+	<script src="sketch.js" ></script>
+  </head>
+
+  <body>
+	  <div id="mainWrapper" align="center" >
+	  	<div id="carouselExampleControls" data-interval="false" class="carousel slide">
+		  <div class="carousel-inner">
+			<div class="carousel-item active">
+				
+			  <div id="frontContent" >
+					<h1 id="headerOne" >Writing with AI</h1>
+					<p id="parraOne" >What should your story be based on?</p>
+					<select class="custom-select" id="inputGroupSelect01">
+						<option value="1">bolano</option>
+						<option value="2">charlotte bronte</option>
+						<option value="3">darwin</option>
+						<option value="4">dubois</option>
+						<option value="5">hemingway</option>
+						<option value="6">shakespeare</option>
+						<option value="7">woolf</option>
+						<option value="8">zora neale hurston</option>
+					</select>
+					<br>
+					<a href="#carouselExampleControls" data-slide="next" id="startToWriteBTN" class="btn btn-primary" onclick="startWriter();" role="button">Start your writing career</a>
+				</div>
+			</div>
+			<div class="carousel-item">
+				
+			  <div id="frontContent" >
+					<p id="parraThree" >Your AI helper is now based on J.R.R. Tolkien</p>
+					<p id="parraFour" >Be the writer of the future.</p>
+					<div class="input-group" id="textArea" >
+					  <div class="input-group-prepend" id="ControllCenter" >
+						<span class="input-group-text">
+							
+							<div class="column">
+								<div id="lenghtDiv" class="col-sm" align="center" >
+									<hr>
+									<p>Lenght</p>
+									<input type="range" min="1" max="100" value="20" id="lenSlider" >
+									<br>
+									<span id="length">20</span>
+									<hr>
+								</div>
+								<div id="tempDiv" class="col-sm" align="center" >
+									<p>Temp</p>
+									<input type="range" min="0" max="1" step="0.01" id="tempSlider" >
+									<br>
+									<span id="temperature">0.5</span>
+									<hr>
+								</div>
+								<div class="col-sm">
+								  <p id="status" >Press enter to <br> keep suggestion.</p>
+									<hr>
+								</div>
+							  </div>
+							</span>
+					  </div>
+					  <div class="form-control" id="" aria-label="With textarea">
+						  
+						  <div class="row writing">
+							  <div class="col-sm ceep">
+							  	<textarea class="form-control" id="textValue" placeholder="type here"></textarea>
+								  <hr>
+								  <div class="column" id="createdContent" >
+								  </div>
+							  </div>
+							  <div class="col-sm-4 AIWriter">
+							  	<p id="result">
+								<span id="original"></span><span id="prediction"></span>
+						  		</p>
+								<button class="btn btn-primary" id="saveTextAndRestartBTN" onclick="savTextAndResetSeed();" >Save</button>
+								<button class="btn btn-primary" id="saveTextAndRestartBTN" onclick="saveAndReset();" >Save and reset</button>
+							  </div>
+						  </div>
+							
+						</div>
+					</div>
+					<br>
+					<button id="startToWriteBTN" class="btn btn-primary" onclick="writingbodyLoaded();" >Save your story</button>
+				</div>
+			</div>
+		  </div>
+		<!--
+		  <a class="carousel-control-next"  role="button" data-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		  </a>
+			-->
+		</div>	
+	  </div>
+
+	  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+	  
+  </body>
+
+</html>
