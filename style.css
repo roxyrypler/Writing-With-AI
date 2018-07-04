@@ -20,7 +20,7 @@ body {
 }
 
 #mainWrapper {
-	padding-top: 10%;
+	padding-top: 5%;
 	background-color: blueviolet;
 	width: 100vW;
 	height: 100vH;
@@ -87,10 +87,17 @@ body {
 
 #result {
 	text-align: left;
+	margin-bottom: 40px;
+	margin-top: 40px;
 }
 
 #parraThree {
 	color: white;
+	font-size: 40px;
+}
+
+#basedOn {
+	color: blueviolet;
 	font-size: 40px;
 }
 

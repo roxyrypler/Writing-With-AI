@@ -35,15 +35,17 @@
 						<option value="6">shakespeare</option>
 						<option value="7">woolf</option>
 						<option value="8">zora neale hurston</option>
+						<option value="9">1984 By George Orwell</option>
 					</select>
 					<br>
 					<a href="#carouselExampleControls" data-slide="next" id="startToWriteBTN" class="btn btn-primary" onclick="startWriter();" role="button">Start your writing career</a>
 				</div>
 			</div>
-			<div class="carousel-item">
-				
+			<div class="carousel-item">	
 			  <div id="frontContent" >
-					<p id="parraThree" >Your AI helper is now based on J.R.R. Tolkien</p>
+				  <div align="center" >
+					<p id="parraThree" >Your AI helper is now based on</p><p id="basedOn" >J.R.R. Tolkien</p>
+					  </div>
 					<p id="parraFour" >Be the writer of the future.</p>
 					<div class="input-group" id="textArea" >
 					  <div class="input-group-prepend" id="ControllCenter" >
@@ -53,9 +55,9 @@
 								<div id="lenghtDiv" class="col-sm" align="center" >
 									<hr>
 									<p>Lenght</p>
-									<input type="range" min="1" max="100" value="20" id="lenSlider" >
+									<input type="range" min="1" max="100" value="50" id="lenSlider" >
 									<br>
-									<span id="length">20</span>
+									<span id="length">50</span>
 									<hr>
 								</div>
 								<div id="tempDiv" class="col-sm" align="center" >
@@ -66,8 +68,7 @@
 									<hr>
 								</div>
 								<div class="col-sm">
-								  <p id="status" >Press enter to <br> keep suggestion.</p>
-									<hr>
+								  <p id="status" >
 								</div>
 							  </div>
 							</span>
@@ -82,6 +83,7 @@
 								  </div>
 							  </div>
 							  <div class="col-sm-4 AIWriter">
+								  <button class="btn btn-primary" id="saveTextAndRestartBTN" onclick="GenerateTextBTN();" >Generate text</button>
 							  	<p id="result">
 								<span id="original"></span><span id="prediction"></span>
 						  		</p>
@@ -93,7 +95,7 @@
 						</div>
 					</div>
 					<br>
-					<button id="startToWriteBTN" class="btn btn-primary" onclick="writingbodyLoaded();" >Save your story</button>
+					<button id="startToWriteBTN" class="btn btn-primary" onclick="saveYourStory();" >Save your story</button>
 				</div>
 			</div>
 		  </div>
