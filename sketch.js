@@ -7,9 +7,6 @@ let textInput;
 let tempSlider;
 let lengthSlider;
 let modelLoader; 
-let createdDivNR = 0;
-let divNRArr = [];
-let gatheredText = [];
 
 function setup() {
   noCanvas();
@@ -125,66 +122,86 @@ function generate() {
 }
 
 function savTextAndResetSeed() {
-	createdDivNR ++;
-	divNRArr.push('CreatedP' + createdDivNR);
 	
 	let getOriginal = document.getElementById('original').innerText;
 	let getPredicted = document.getElementById('prediction').innerText;
 	let combinedText = getOriginal + getPredicted;
+	let createdText = document.getElementById('createdText').value;
 	
-	let createP = document.createElement('textarea');
-	createP.id = 'CreatedP';
-	createP.className = 'form-control';
-	let textInP = document.createTextNode(combinedText);
-	createP.appendChild(textInP);
+	let txt = createdText.concat(combinedText);
+	let applyText = document.getElementById('createdText').innerHTML = " " + txt;
 	
-	let createDIV = document.createElement('div');
-	createDIV.id = 'createdDIV' + createdDivNR;
-	createDIV.appendChild(createP);
+	//let createP = document.createElement('textarea');
+	//createP.id = 'CreatedP' + createdDivNR;
+	//createP.className = 'form-control';
+	//let textInP = document.createTextNode(combinedText);
+	//createP.appendChild(textInP);
 	
-	let divParrent = document.getElementById('createdContent');
-	divParrent.appendChild(createDIV);
+	//let createDIV = document.createElement('div');
+	//createDIV.id = 'createdDIV' + createdDivNR;
+	//createDIV.appendChild(createP);
+	
+	//let divParrent = document.getElementById('createdContent');
+	//divParrent.appendChild(createDIV);
 }
 
 function saveAndReset() {
-	createdDivNR++;
-	divNRArr.push('CreatedP' + createdDivNR);
 	
 	let getOriginal = document.getElementById('original').innerText;
 	let getPredicted = document.getElementById('prediction').innerText;
 	let combinedText = getOriginal + getPredicted;
+	let createdText = document.getElementById('createdText').value;
 	
-	let createP = document.createElement('textarea');
-	createP.id = 'CreatedP';
-	createP.className = 'form-control';
-	let textInP = document.createTextNode(combinedText);
-	createP.appendChild(textInP);
+	let txt = createdText.concat(combinedText);
+	let applyText = document.getElementById('createdText').innerHTML = " " + txt;
 	
-	let createDIV = document.createElement('div');
-	createDIV.id = 'createdDIV' + createdDivNR;
-	createDIV.appendChild(createP);
+	//let createP = document.createElement('textarea');
+	//createP.id = 'CreatedP' + createdDivNR;
+	//createP.className = 'form-control';
+	//let textInP = document.createTextNode(combinedText);
+	//createP.appendChild(textInP);
 	
-	let divParrent = document.getElementById('createdContent');
-	divParrent.appendChild(createDIV);
+	//let createDIV = document.createElement('div');
+	//createDIV.id = 'createdDIV';
+	//createDIV.appendChild(createP);
+	
+	//let divParrent = document.getElementById('createdContent');
+	//divParrent.appendChild(createDIV);
 	
 	document.getElementById('textValue').value = '';
 	getOriginal = document.getElementById('original').innerText = '';
 	getPredicted = document.getElementById('prediction').innerText = '';
 }
+	
+	
+function saveStory()
+{
+	var textToWrite = document.getElementById('createdText').value;
+	var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
+	var fileNameToSaveAs = 'Your story';
 
-function saveYourStory() {
+	var downloadLink = document.createElement("a");
+	downloadLink.download = fileNameToSaveAs;
+	downloadLink.innerHTML = "Download File";
 	
-	//let getAllText = document.getElementById('CreatedP').innerHTML;
-	
-	for (let i = 0; i < divNRArr.length; i++) {
-		let getAllText = document.getElementById('createdDIV' + createdDivNR).innerHTML;
-		gatheredText.unshift(getAllText);
+	if(textToWrite.length == 0 || textToWrite == null) {
+		alert('You must save some text first');
+	}else if (window.webkitURL != null) {
+		// Chrome allows the link to be clicked
+		// without actually adding it to the DOM.
+		downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+	}else {
+		// Firefox requires the link to be added to the DOM
+		// before it can be clicked.
+		downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+		downloadLink.onclick = destroyClickedElement;
+		downloadLink.style.display = "none";
+		document.body.appendChild(downloadLink);
 	}
-	
-	console.log(gatheredText);
-	
-	
+
+	downloadLink.click();
 }
+
 
 
 
