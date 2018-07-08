@@ -7,24 +7,65 @@ let textInput;
 let tempSlider;
 let lengthSlider;
 let modelLoader; 
+let autocompletereff;
 
 
 function setup() {
   noCanvas();
 
   startToWriteBTN = document.getElementById('startToWriteBTN');
+  autocompletereff = document.getElementById('createdText');
 	
   // Grab the DOM elements
   textInput = select('#textValue');
   lengthSlider = select('#lenSlider');
   tempSlider = select('#tempSlider');
-
+  //autocompletereff.onchange(autocomplete);
   // Run generate anytime something changes
   //textInput.input(generate);
   lengthSlider.input(updateSliders);
   tempSlider.input(updateSliders);
 }
+/*
+function autocomplete() {
+	
+if (txt.length > 0) {
+    // Here is the data for the LSTM generator
+    let data = {
+      seed: txt,
+      temperature: tempSlider.value(),
+      length: lengthSlider.value()
+    };
 
+    // Generate text with the lstm
+    lstm.generate(data, gotData);
+
+    // Update the DOM elements with typed and generated text
+    function gotData(result) {
+	  let FixedToPeriod = result.generated;
+	  FixedToPeriod = FixedToPeriod.substr(0, FixedToPeriod.lastIndexOf("."));
+		
+		if (FixedToPeriod == "") {
+			lstm.generate(data, gotData);
+			console.log("Make again");
+		}else {
+		  //alert(FixedToPeriod);
+		  select('#status').html('Ready!');
+		  select('#original').html(original);
+		  select('#prediction').html(FixedToPeriod + ".");
+		}
+    }
+  } else {
+    // Clear everything
+    select('#original').html('');
+    select('#prediction').html('');
+  }
+}
+	
+function gotDataAuto() {
+	
+}
+*/
 function startWriter() {
 	selectionInput = document.getElementById('inputGroupSelect01').value;
 	modelSelector = selectionInput;
@@ -68,7 +109,7 @@ function startWriter() {
 		//console.log(lstm);
 	}else if (modelSelector == 10) {
 		lstm = ml5.LSTMGenerator('models/GayLesbianGenre/', modelReady);
-		document.getElementById('basedOn').innerHTML = '1984 By George Orwell';
+		document.getElementById('basedOn').innerHTML = 'Gay Lesbian Genre';
 		//console.log(lstm);
 	}
 }
@@ -168,7 +209,7 @@ function saveAndReset() {
 	let createdText = document.getElementById('createdText').value;
 	
 	let txt = createdText.concat(combinedText);
-	let applyText = document.getElementById('createdText').innerHTML = " " + txt;
+	let applyText = document.getElementById('createdText').innerHTML = txt + " ";
 	
 	//let createP = document.createElement('textarea');
 	//createP.id = 'CreatedP' + createdDivNR;
