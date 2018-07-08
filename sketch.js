@@ -8,6 +8,7 @@ let tempSlider;
 let lengthSlider;
 let modelLoader; 
 
+
 function setup() {
   noCanvas();
 
@@ -65,8 +66,13 @@ function startWriter() {
 		lstm = ml5.LSTMGenerator('models/1984_By_George_Orwell/', modelReady);
 		document.getElementById('basedOn').innerHTML = '1984 By George Orwell';
 		//console.log(lstm);
+	}else if (modelSelector == 10) {
+		lstm = ml5.LSTMGenerator('models/GayLesbianGenre/', modelReady);
+		document.getElementById('basedOn').innerHTML = '1984 By George Orwell';
+		//console.log(lstm);
 	}
 }
+
 
 function modelReady() {
   select('#status').html('Model Loaded');
@@ -110,9 +116,18 @@ function generate() {
 
     // Update the DOM elements with typed and generated text
     function gotData(result) {
-      select('#status').html('Ready!');
-      select('#original').html(original);
-      select('#prediction').html(result.generated);
+	  let FixedToPeriod = result.generated;
+	  FixedToPeriod = FixedToPeriod.substr(0, FixedToPeriod.lastIndexOf("."));
+		
+		if (FixedToPeriod == "") {
+			lstm.generate(data, gotData);
+			console.log("Make again");
+		}else {
+		  //alert(FixedToPeriod);
+		  select('#status').html('Ready!');
+		  select('#original').html(original);
+		  select('#prediction').html(FixedToPeriod + ".");
+		}
     }
   } else {
     // Clear everything
@@ -129,7 +144,7 @@ function savTextAndResetSeed() {
 	let createdText = document.getElementById('createdText').value;
 	
 	let txt = createdText.concat(combinedText);
-	let applyText = document.getElementById('createdText').innerHTML = " " + txt;
+	let applyText = document.getElementById('createdText').innerHTML = txt + " ";
 	
 	//let createP = document.createElement('textarea');
 	//createP.id = 'CreatedP' + createdDivNR;
