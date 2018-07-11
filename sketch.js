@@ -13,59 +13,44 @@ let autocompletereff;
 function setup() {
   noCanvas();
 
-  startToWriteBTN = document.getElementById('startToWriteBTN');
-  autocompletereff = document.getElementById('createdText');
+  startToWriteBTN = select('#startToWriteBTN');
 	
-  // Grab the DOM elements
-  textInput = select('#textValue');
+  textInput = select('#createdText');
   lengthSlider = select('#lenSlider');
   tempSlider = select('#tempSlider');
-  //autocompletereff.onchange(autocomplete);
-  // Run generate anytime something changes
-  //textInput.input(generate);
+ 
   lengthSlider.input(updateSliders);
   tempSlider.input(updateSliders);
-}
-/*
-function autocomplete() {
+  
 	
-if (txt.length > 0) {
-    // Here is the data for the LSTM generator
-    let data = {
-      seed: txt,
-      temperature: tempSlider.value(),
-      length: lengthSlider.value()
-    };
-
-    // Generate text with the lstm
-    lstm.generate(data, gotData);
-
-    // Update the DOM elements with typed and generated text
-    function gotData(result) {
-	  let FixedToPeriod = result.generated;
-	  FixedToPeriod = FixedToPeriod.substr(0, FixedToPeriod.lastIndexOf("."));
-		
-		if (FixedToPeriod == "") {
-			lstm.generate(data, gotData);
-			console.log("Make again");
-		}else {
-		  //alert(FixedToPeriod);
-		  select('#status').html('Ready!');
-		  select('#original').html(original);
-		  select('#prediction').html(FixedToPeriod + ".");
-		}
-    }
-  } else {
-    // Clear everything
-    select('#original').html('');
-    select('#prediction').html('');
+  let button = document.getElementsByClassName("diff");
+  for (var i = 0; i < button.length; i++) {
+    button[i].addEventListener("click", function() {
+	  console.log(this.innerHTML);
+	   
+	  let createdText = document.getElementById('createdText').value;
+	  let txt = createdText.concat(this.innerHTML);
+	  let applyText = document.getElementById('createdText').value = txt + " ";
+	   
+	  //createWordSuggestions();
+    });
   }
 }
-	
-function gotDataAuto() {
-	
+
+function modelReady() {
+  select('#status').html('Model Loaded');
 }
-*/
+
+function GenerateTextBTN() {
+	generate();
+}
+
+function updateSliders() {
+	select('#length').html(lengthSlider.value());
+  	select('#temperature').html(tempSlider.value());
+}
+
+
 function startWriter() {
 	selectionInput = document.getElementById('inputGroupSelect01').value;
 	modelSelector = selectionInput;
@@ -115,21 +100,6 @@ function startWriter() {
 }
 
 
-function modelReady() {
-  select('#status').html('Model Loaded');
-}
-
-function GenerateTextBTN() {
-	generate();
-}
-
-function updateSliders() {
-	select('#length').html(lengthSlider.value());
-  	select('#temperature').html(tempSlider.value());
-}
-
-
-
 function generate() {
   // Update the status log
   select('#status').html('Generating...');
@@ -177,6 +147,126 @@ function generate() {
   }
 }
 
+
+function createWordSuggestions() {
+	// Update the status log
+  select('#status').html('Generating...');
+
+  // Update the length and temperature span elements
+  select('#length').html(lengthSlider.value());
+  select('#temperature').html(tempSlider.value());
+
+  // Grab the original text
+  let original = textInput.value();
+  // Make it to lower case
+  let txt = original.toLowerCase();
+
+  // Check if there's something
+  if (txt.length > 0) {
+    // Here is the data for the LSTM generator
+    let data = {
+      seed: txt,
+      temperature: tempSlider.value(),
+      length: lengthSlider.value()
+    };
+	  
+	for (let i = 0; i < 8; i++) {
+		// Generate text with the lstm
+		lstm.generate(data, gotData);
+
+		// Update the DOM elements with typed and generated text
+		function gotData(result) {
+			let onlyOneWord = result.generated;
+			let res = onlyOneWord.split(" ");
+			let rand = res[Math.floor(Math.random() * res.length)];
+			if (rand == "") {
+				let rand = res[Math.floor(Math.random() * res.length)];
+			}else {
+				//console.log(rand);	
+				document.getElementById('SuggBTN' + [i]).innerHTML = rand;	
+			}
+		}
+	}
+  }
+}
+
+function IfAutoGenCanGetInput() {
+	let textField = document.getElementById('createdText').value;
+	//console.log(textField);
+	
+	if (textField == "") {
+		alert("You must type something first");
+	}else {
+		autoGenerate();
+	}
+}
+
+function autoGenerate() {
+	
+  let tempSliderVal = 6;
+  let tempTxtArr = [];
+  let placeHoldestring = "";
+  let tempString = "";
+  let limitedArr = [];
+	
+	// Update the status log
+  select('#status').html('Generating...');
+
+  // Update the length and temperature span elements
+  select('#length').html(lengthSlider.value());
+  select('#temperature').html(tempSlider.value());
+
+  // Grab the original text
+  let original = textInput.value();
+  // Make it to lower case
+  let txt = original.toLowerCase();
+  let splittedTxt = txt.split(" ");
+	
+		
+		for (let i = 0; i < splittedTxt.length; i++) {
+			tempTxtArr.push(splittedTxt[i]);
+		}
+	//console.log(tempTxtArr);
+		
+		limitedArr = tempTxtArr.slice(tempTxtArr.length - tempSliderVal);
+	
+	  	placeHoldestring = limitedArr.join(" ");
+		console.log(limitedArr);
+
+	  // Check if there's something
+	  if (placeHoldestring.length > 0) {
+		// Here is the data for the LSTM generator
+		let data = {
+		  seed: placeHoldestring,
+		  temperature: tempSlider.value(),
+		  length: lengthSlider.value()
+		};
+
+			lstm.generate(data, gotData);
+
+			// Update the DOM elements with typed and generated text
+			function gotData(result) {
+				let FixedToPeriod = result.generated;
+				FixedToPeriod = FixedToPeriod.substr(0, FixedToPeriod.lastIndexOf("."));
+
+				if (FixedToPeriod == "") {
+					lstm.generate(data, gotData);
+					console.log("Make again");
+				}else {
+				  //alert(FixedToPeriod);
+				  //console.log(FixedToPeriod);
+				  select('#status').html('Ready!');
+				  let prevVal = document.getElementById('createdText').value;
+				  document.getElementById('createdText').value = prevVal + FixedToPeriod + ".";
+				}
+			}	
+		} else {
+			// Clear everything
+			//select('#prediction').html('');
+		}
+  }
+
+
 function savTextAndResetSeed() {
 	
 	let getOriginal = document.getElementById('original').innerText;
@@ -187,18 +277,6 @@ function savTextAndResetSeed() {
 	let txt = createdText.concat(combinedText);
 	let applyText = document.getElementById('createdText').innerHTML = txt + " ";
 	
-	//let createP = document.createElement('textarea');
-	//createP.id = 'CreatedP' + createdDivNR;
-	//createP.className = 'form-control';
-	//let textInP = document.createTextNode(combinedText);
-	//createP.appendChild(textInP);
-	
-	//let createDIV = document.createElement('div');
-	//createDIV.id = 'createdDIV' + createdDivNR;
-	//createDIV.appendChild(createP);
-	
-	//let divParrent = document.getElementById('createdContent');
-	//divParrent.appendChild(createDIV);
 }
 
 function saveAndReset() {
@@ -211,27 +289,14 @@ function saveAndReset() {
 	let txt = createdText.concat(combinedText);
 	let applyText = document.getElementById('createdText').innerHTML = txt + " ";
 	
-	//let createP = document.createElement('textarea');
-	//createP.id = 'CreatedP' + createdDivNR;
-	//createP.className = 'form-control';
-	//let textInP = document.createTextNode(combinedText);
-	//createP.appendChild(textInP);
-	
-	//let createDIV = document.createElement('div');
-	//createDIV.id = 'createdDIV';
-	//createDIV.appendChild(createP);
-	
-	//let divParrent = document.getElementById('createdContent');
-	//divParrent.appendChild(createDIV);
-	
 	document.getElementById('textValue').value = '';
 	getOriginal = document.getElementById('original').innerText = '';
 	getPredicted = document.getElementById('prediction').innerText = '';
 }
 	
 	
-function saveStory()
-{
+function saveStory() {
+	
 	var textToWrite = document.getElementById('createdText').value;
 	var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
 	var fileNameToSaveAs = 'Your story';
@@ -257,6 +322,9 @@ function saveStory()
 
 	downloadLink.click();
 }
+
+
+
 
 
 

@@ -45,7 +45,7 @@
 			<div class="carousel-item">	
 			  <div id="frontContent" >
 				  <div align="center" >
-					<p id="parraThree" >Your AI helper is now based on</p><p id="basedOn" >J.R.R. Tolkien</p>
+					<p id="parraThree" >Your AI helper is now based on</p><p id="basedOn" ></p>
 					  </div>
 					<p id="parraFour" >Be the writer of the future.</p>
 					<div class="input-group" id="textArea" >
@@ -77,20 +77,48 @@
 					  <div class="form-control" id="" aria-label="With textarea">
 						  
 						  <div class="row writing">
-							  <div class="col-sm ceep">
-							  	<textarea class="form-control" id="textValue" placeholder="type here"></textarea>
-								  <hr>
+							  <div class="col-sm ceep"><!--
+							  	<textarea class="form-control" placeholder="type here"></textarea>
+-->
+								    <button class="btn btn-primary col-sm-3" id="saveTextAndRestartBTN" onclick="IfAutoGenCanGetInput();" >Generate text</button>
+								  
 								  <div class="column" id="createdContent" >
 									  <textarea class="form-control" id="createdText"></textarea>
 								  </div>
 							  </div>
-							  <div class="col-sm-4 AIWriter">
-								  <button class="btn btn-primary" id="saveTextAndRestartBTN" onclick="GenerateTextBTN();" >Generate text</button>
-							  	<p id="result">
-								<span id="original"></span><span id="prediction"></span>
-						  		</p>
-								<button class="btn btn-primary" id="saveTextAndRestartBTN" onclick="savTextAndResetSeed();" >Save</button>
-								<button class="btn btn-primary" id="saveTextAndRestartBTN" onclick="saveAndReset();" >Save and reset</button>
+							  
+							  <div class="row suggBox">
+								  <div class="col suggWordHolder">
+									  <button class="btn btn-primary col-sm" id="regenerateSuggs" onclick="createWordSuggestions();" >Regenerate suggestions</button>
+								  </div>
+								  <div class="w-100 suggDevider"></div>
+								<div class="col suggWordHolder" id="Sugg0" >
+								  	<button id="SuggBTN0" class="btn btn-primary col-sm-10 diff" onclick="" >hi</button>
+								  </div>
+								<div class="col suggWordHolder" id="Sugg1" >
+								  	<button id="SuggBTN1" class="btn btn-primary col-sm-10 diff" onclick="" >hello</button>
+								  </div>
+								<div class="w-100 suggDevider"></div>
+								<div class="col suggWordHolder" id="Sugg2" >
+								  	<button id="SuggBTN2" class="btn btn-primary col-sm-10 diff" onclick="" >may</button>
+								  </div>
+								<div class="col suggWordHolder" id="Sugg3" >
+								  	<button id="SuggBTN3" class="btn btn-primary col-sm-10 diff" onclick="" >i</button>
+								  </div>
+								<div class="w-100 suggDevider"></div>
+								<div class="col suggWordHolder" id="Sugg4" >
+								  	<button id="SuggBTN4" class="btn btn-primary col-sm-10 diff" onclick="" >open</button>
+								  </div>
+								<div class="col suggWordHolder" id="Sugg5" >
+								  	<button id="SuggBTN5" class="btn btn-primary col-sm-10 diff" onclick="" >high</button>
+								  </div>
+								<div class="w-100 suggDevider"></div>
+								<div class="col suggWordHolder" id="Sugg6" >
+								  	<button id="SuggBTN6" class="btn btn-primary col-sm-10 diff" onclick="" >long</button>
+								  </div>
+								<div class="col suggWordHolder" id="Sugg7" >
+								  	<button id="SuggBTN7" class="btn btn-primary col-sm-10 diff" onclick="" >wow</button>
+								  </div>
 							  </div>
 						  </div>
 							
