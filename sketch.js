@@ -96,6 +96,10 @@ function startWriter() {
 		lstm = ml5.LSTMGenerator('models/GayLesbianGenre/', modelReady);
 		document.getElementById('basedOn').innerHTML = 'Gay Lesbian Genre';
 		//console.log(lstm);
+	}else if (modelSelector == 11) {
+		lstm = ml5.LSTMGenerator('models/Psychology/', modelReady);
+		document.getElementById('basedOn').innerHTML = 'Psychology';
+		//console.log(lstm);
 	}
 }
 
