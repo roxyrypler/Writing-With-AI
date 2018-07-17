@@ -153,6 +153,12 @@ function generate() {
 
 
 function createWordSuggestions() {
+	
+  let tempSliderVal = 6;
+  let tempTxtArr = [];
+  let placeHoldestring = "";
+  let tempString = "";
+  let limitedArr = [];
 	// Update the status log
   select('#status').html('Generating...');
 
@@ -164,15 +170,27 @@ function createWordSuggestions() {
   let original = textInput.value();
   // Make it to lower case
   let txt = original.toLowerCase();
+  let splittedTxt = txt.split(" ");
+	
+		
+		for (let i = 0; i < splittedTxt.length; i++) {
+			tempTxtArr.push(splittedTxt[i]);
+		}
+	//console.log(tempTxtArr);
+		
+		limitedArr = tempTxtArr.slice(tempTxtArr.length - tempSliderVal);
+	
+	  	placeHoldestring = limitedArr.join(" ");
+		console.log(limitedArr);
 
-  // Check if there's something
-  if (txt.length > 0) {
-    // Here is the data for the LSTM generator
-    let data = {
-      seed: txt,
-      temperature: tempSlider.value(),
-      length: lengthSlider.value()
-    };
+	  // Check if there's something
+	  if (placeHoldestring.length > 0) {
+		// Here is the data for the LSTM generator
+		let data = {
+		  seed: placeHoldestring,
+		  temperature: tempSlider.value(),
+		  length: lengthSlider.value()
+		};
 	  
 	for (let i = 0; i < 8; i++) {
 		// Generate text with the lstm
@@ -252,13 +270,11 @@ function autoGenerate() {
 			function gotData(result) {
 				let FixedToPeriod = result.generated;
 				FixedToPeriod = FixedToPeriod.substr(0, FixedToPeriod.lastIndexOf("."));
-
+		
 				if (FixedToPeriod == "") {
 					lstm.generate(data, gotData);
 					console.log("Make again");
 				}else {
-				  //alert(FixedToPeriod);
-				  //console.log(FixedToPeriod);
 				  select('#status').html('Ready!');
 				  let prevVal = document.getElementById('createdText').value;
 				  document.getElementById('createdText').value = prevVal + FixedToPeriod + ".";
