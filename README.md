@@ -13,7 +13,7 @@ i have trained:
 -Psychology - based on 95 books from (http://manybooks.net/categories/)
 
 Upcoming models:
--Pirate Tales based on 99 books from (http://manybooks.net/categories/)
+-Pirate Tales based on 99 books from (http://manybooks.net/categories/) 
 
 ---------------------------------------------------------------------------------------------------------
 
