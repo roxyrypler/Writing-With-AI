@@ -1,8 +1,10 @@
 # Writing-With-AI
 Version 0.0.1 
 
+after update from ml5js lib does this project not work until i get time to fix this.
+
 If you whant to test this out, just go here:
-https://roxyrypler.github.io/Writing-With-AI/
+https://roxyrypler.github.io/Writing-With-AI/ (does not work right now)
 
 This is me just playing with and learning the new machine learning library: ML5.js.
 Right now i have trained a couple of models with an LSTM provided by ml5.js team
